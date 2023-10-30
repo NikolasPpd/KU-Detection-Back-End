@@ -1,15 +1,14 @@
 import os
 import shutil
 from config.settings import TEMP_FILES_BASE_PATH
-from core.git_operations import (get_repo)
+from core.git_operations import get_repo
 from .diff import get_contributions_from_diffs
 
 
 def create_temp_dir():
-    # Check or create temp directory
     if os.path.exists(TEMP_FILES_BASE_PATH):
-        shutil.rmtree(TEMP_FILES_BASE_PATH)  # Remove the directory and its contents
-    os.mkdir(TEMP_FILES_BASE_PATH)  # Create the directory
+        shutil.rmtree(TEMP_FILES_BASE_PATH)
+    os.mkdir(TEMP_FILES_BASE_PATH)
 
 
 def extract_contributions(repo_path, commit_limit=None, skip=0, fetch_updates=False):
@@ -22,7 +21,7 @@ def extract_contributions(repo_path, commit_limit=None, skip=0, fetch_updates=Fa
 
     contributions = []
 
-    # Iterate over commits in the main branch
+    # Iterate over commits in the active branch
     for commit in repo.iter_commits(max_count=commit_limit, skip=skip):
         if commit.hexsha in processed_commits:
             continue

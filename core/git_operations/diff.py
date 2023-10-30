@@ -11,7 +11,7 @@ def get_contributions_from_diffs(commit, diffs):
     for diff in diffs:
         # Determine the relevant file path
         relevant_path = diff.b_path if diff.b_path else diff.a_path
-        # Check if the file is a file of type FILE_TYPE
+
         if relevant_path.endswith(f".{FILE_TYPE}"):
             try:
                 # Extract the content of the file for the specific commit
@@ -21,7 +21,6 @@ def get_contributions_from_diffs(commit, diffs):
 
                 # Convert the relevant path to a format suitable for a filename
                 sanitized_path = relevant_path.replace("/", "_")
-                # sanitized_path = sanitized_path.split(".")[0]
                 sanitized_path = sanitized_path.rsplit('.', 1)[0]
                 sanitized_path = sanitized_path.replace(".", "-")
                 sanitized_filename = f"{sanitized_path}_{commit.hexsha[:7]}{ext}"
@@ -35,10 +34,6 @@ def get_contributions_from_diffs(commit, diffs):
             except KeyError:
                 # If the file was deleted or renamed, skip it
                 continue
-
-            # # Call the CLI tool
-            # TODO: move further down
-            # call_cli_tool(temp_filepath)
 
             if commit.parents:
                 diff_lines = diff.diff.decode("utf-8").splitlines()
@@ -63,7 +58,6 @@ def get_contributions_from_diffs(commit, diffs):
                 # For the first commit, consider all lines as added
                 line_numbers = list(range(1, len(content.splitlines()) + 1))
 
-            # if added_lines:
             if line_numbers:
                 contributions.append(
                     {
@@ -90,11 +84,4 @@ def line_is_accepted(line, content):
     content = remove_imports(content)
     if line[1:] not in content:
         return False
-
     return True
-
-
-# TODO: implement slicing or remove
-def call_cli_tool(filepath):
-    # Placeholder for calling the CLI tool on the provided filepath
-    pass

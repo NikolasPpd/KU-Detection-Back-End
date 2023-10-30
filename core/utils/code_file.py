@@ -1,5 +1,6 @@
 from .code_preprocessing import (remove_comments, remove_imports, remove_packages)
 
+
 class CodeFile:
     def __init__(self, filename, content, author=None, timestamp=None):
         self.filename = filename

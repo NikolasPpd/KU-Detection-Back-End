@@ -1,5 +1,6 @@
 from core.utils.code_preprocessing import *
 
+
 class Model:
     def __init__(self, vectorizer, selector, model, name, filetype):
         self.vectorizer = vectorizer

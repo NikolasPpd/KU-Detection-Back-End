@@ -3,15 +3,16 @@ from joblib import load
 import tensorflow as tf
 from .model import Model
 
+
 def load_models_from_directory(directory, models_to_load=None):
     models = []
 
-    # iterate over all subdirectories
+    # Iterate over all subdirectories
     for subdir in os.listdir(directory):
         if not os.path.isdir(os.path.join(directory, subdir)):
             continue
 
-        # confirm it matches the "K#" pattern
+        # Confirm it matches the "K#" pattern
         if models_to_load is not None and subdir not in models_to_load:
             continue
 
@@ -20,7 +21,7 @@ def load_models_from_directory(directory, models_to_load=None):
         model = None
         filetype = None
 
-        # Find and Load vectorizer
+        # Find and load the vectorizer
         vectorizer_path = None
         for file in os.listdir(os.path.join(directory, subdir)):
             if file.startswith(f"{subdir}_vectorizer") and file.endswith(".pkl"):
@@ -31,7 +32,7 @@ def load_models_from_directory(directory, models_to_load=None):
             print(f"Vectorizer not found for {subdir}. Skipping...")
             continue
 
-        # Find and Load selector
+        # Find and load the selector
         selector_path = None
         for file in os.listdir(os.path.join(directory, subdir)):
             if file.startswith(f"{subdir}_selector") and file.endswith(".pkl"):
@@ -42,7 +43,7 @@ def load_models_from_directory(directory, models_to_load=None):
             print(f"Selector not found for {subdir}. Skipping...")
             continue
 
-        # Load model, either .pkl or .h5
+        # Load the model, either .pkl or .h5
         model_path = None
         for file in os.listdir(os.path.join(directory, subdir)):
             if file.endswith("model.pkl"):
@@ -62,7 +63,7 @@ def load_models_from_directory(directory, models_to_load=None):
 
         if vectorizer and selector and model:
             print(f"Loaded {subdir} model")
-            # append the loaded Model instance to models list
+            # append the loaded Model instance to the models list
             models.append(Model(vectorizer, selector, model, subdir, filetype))
 
     return models
