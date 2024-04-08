@@ -3,6 +3,9 @@ from joblib import load
 import tensorflow as tf
 from .model import Model
 
+# Suppress TensorFlow warnings about CPU instructions
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 
 def load_models_from_directory(directory, models_to_load=None):
     models = []
