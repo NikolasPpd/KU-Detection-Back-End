@@ -3,6 +3,6 @@ venv/
 run.py
 __pycache__/
 cloned_repos/
-data/models/*
+#data/models/*
 temp
 output
