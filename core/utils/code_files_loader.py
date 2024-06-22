@@ -38,6 +38,6 @@ def read_files_from_dict_list(dict_list: list):
     for contribution in dict_list:
         filename = os.path.basename(contribution["temp_filepath"]).split(".")[0]
         contents[filename] = CodeFile(filename, contribution["file_content"], author=contribution["author"],
-                                      timestamp=contribution["timestamp"])
+                                      timestamp=contribution["timestamp"], sha=contribution["sha"])
 
     return contents

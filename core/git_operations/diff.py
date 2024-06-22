@@ -68,6 +68,7 @@ def get_contributions_from_diffs(commit, diffs):
                         "timestamp": datetime.fromtimestamp(
                             commit.committed_date
                         ).isoformat(),
+                        "sha": commit.hexsha,
                     }
                 )
 

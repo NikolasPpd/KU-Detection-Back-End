@@ -2,7 +2,7 @@ from .code_preprocessing import (remove_comments, remove_imports, remove_package
 
 
 class CodeFile:
-    def __init__(self, filename, content, author=None, timestamp=None):
+    def __init__(self, filename, content, author=None, timestamp=None, sha=None):
         self.filename = filename
         self.content = content
         self.content = self.__clean_file()
@@ -11,6 +11,7 @@ class CodeFile:
 
         self.author = author
         self.timestamp = timestamp
+        self.sha = sha
         self.ku_results = {}
 
     def __str__(self):
