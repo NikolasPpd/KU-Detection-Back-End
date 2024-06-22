@@ -1,5 +1,14 @@
 import git
 import os
+from config.settings import CLONED_REPO_BASE_PATH
+
+
+def repo_exists(repo_name: str) -> bool:
+    """Checks if a repository with the given name exists in the current working directory.
+
+    :param repo_name: The name of the repository.
+    :return: True if the repository exists, False otherwise."""
+    return os.path.exists(os.path.join(CLONED_REPO_BASE_PATH, "fake_session_id", repo_name))
 
 
 def clone_repo(url: str, path: str) -> dict:
