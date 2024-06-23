@@ -1,7 +1,8 @@
 import os
 from joblib import load
 import tensorflow as tf
-from .model import Model
+from .model import *
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Suppress TensorFlow warnings about CPU instructions
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -70,3 +71,9 @@ def load_models_from_directory(directory, models_to_load=None):
             models.append(Model(vectorizer, selector, model, subdir, filetype))
 
     return models
+
+
+def load_codebert_model(directory, number_of_kus=27):
+    tokenizer = AutoTokenizer.from_pretrained(directory)
+    model = AutoModelForSequenceClassification.from_pretrained(directory)
+    return CodeBERTModel(tokenizer, model, "CodeBERT", number_of_kus)

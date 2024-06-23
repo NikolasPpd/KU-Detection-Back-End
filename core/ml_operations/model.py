@@ -1,4 +1,5 @@
 from core.utils.code_preprocessing import *
+import torch
 
 
 class Model:
@@ -49,3 +50,41 @@ class Model:
         x = self.selector.transform(x).astype("float32")
 
         return x
+
+
+class CodeBERTModel:
+    def __init__(self, tokenizer, model, name, number_of_kus):
+        self.tokenizer = tokenizer
+        self.model = model
+        self.name = name
+        self.number_of_kus = number_of_kus
+
+    def __str__(self):
+        return self.name
+
+    def number_of_kus(self):
+        return self.number_of_kus
+
+    def predict(self, code):
+        code = "\n".join(code)
+        code = remove_blank_lines(code)
+        code = replace_strings_and_chars(code)
+        code = replace_numbers(code)
+        code = replace_booleans(code)
+
+        # Tokenize the input code snippet
+        inputs = self.tokenizer([code], padding=True, truncation=True, return_tensors='pt')
+
+        # Make predictions
+        self.model.eval()
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+
+        # Convert logits to probabilities
+        predictions = torch.sigmoid(outputs.logits)
+
+        # Apply a threshold to get binary predictions
+        threshold = 0.5
+        binary_predictions = (predictions > threshold).int()
+
+        return binary_predictions[0]

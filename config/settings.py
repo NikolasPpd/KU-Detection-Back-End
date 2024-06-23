@@ -5,6 +5,7 @@ TEMP_FILES_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "temp"))
 OUTPUT_FILES_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "output"))
 CLONED_REPO_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "cloned_repos"))
 MODELS_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "models"))
+CODEBERT_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "codebert"))
 FILE_TYPE = "java"
 MODELS_TO_LOAD = [
     "K2",
