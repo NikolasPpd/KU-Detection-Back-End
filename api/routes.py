@@ -9,7 +9,6 @@ from config.settings import *
 import os
 import time
 import json
-import random
 
 # In-memory storage for selected commits. Temporary solution.
 selected_commits = {}
