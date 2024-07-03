@@ -4,8 +4,8 @@ ROOT_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, "..")))
 TEMP_FILES_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "temp"))
 OUTPUT_FILES_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "output"))
 CLONED_REPO_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "cloned_repos"))
-MODELS_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "models"))
-CODEBERT_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "data", "codebert"))
+MODELS_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "models", "binary_classifiers"))
+CODEBERT_BASE_PATH = os.path.normpath(os.path.join(ROOT_DIR, "models", "codebert"))
 FILE_TYPE = "java"
 MODELS_TO_LOAD = [
     "K2",
